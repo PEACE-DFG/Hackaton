@@ -41,23 +41,36 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-
 const rotatedStates = Array.from({ length: 5 }, () => false);
 const timeouts = [];
 
+function resetToDefault(boot, index) {
+  clearTimeout(timeouts[index]);
+  boot.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32" fill="none">
+      <circle cx="16" cy="16" r="12" stroke="#8A8A8A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 6" />
+    </svg>`;
+}
 
 function rotateSVG(index) {
   const boot = document.querySelector(`.boot[data-index="${index}"]`);
-  rotatedStates[index] = !rotatedStates[index];
+  const isRotated = rotatedStates[index];
 
-  if (rotatedStates[index]) {
+  
+
+  if (isRotated) {
+    boot.classList.remove('rotated');
+    resetToDefault(boot, index);
+  } else {
     boot.classList.add('rotated');
     playSequence(boot, index);
-  } else {
-    boot.classList.remove('rotated');
-    resetToDefault(boot,index);
   }
+
+  rotatedStates[index] = !isRotated;
 }
+
+
+
 
 function playSequence(boot, index) {
   const delay = 200;
@@ -75,21 +88,17 @@ const svgSequence = [
   }
 }
 
-function resetToDefault(boot, index) {
-  clearTimeout(timeouts[index]); // Clear the timeout associated with the correct index
-  boot.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32" fill="none">
-      <circle cx="16" cy="16" r="12" stroke="#8A8A8A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 6" />
-    </svg>`;
-}
 
-// Adding click event listeners to each boot element
 const boots = document.querySelectorAll('.boot');
 boots.forEach((boot, index) => {
   boot.addEventListener('click', () => {
-    rotateSVG(index + 1); // Index is 0-based, but your SVGs are 1-based
+    rotateSVG(index - 5); 
   });
 });
+
+
+
+
 
 document.addEventListener('DOMContentLoaded', function () {
   let completedSections = 0;
