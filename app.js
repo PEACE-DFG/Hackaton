@@ -43,6 +43,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 const rotatedStates = Array.from({ length: 5 }, () => false);
+const timeouts = [];
+
 
 function rotateSVG(index) {
   const boot = document.querySelector(`.boot[data-index="${index}"]`);
@@ -73,8 +75,8 @@ const svgSequence = [
   }
 }
 
-function resetToDefault(boot) {
-  clearTimeout(timeouts[index]);
+function resetToDefault(boot, index) {
+  clearTimeout(timeouts[index]); // Clear the timeout associated with the correct index
   boot.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32" fill="none">
       <circle cx="16" cy="16" r="12" stroke="#8A8A8A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 6" />
@@ -89,48 +91,46 @@ boots.forEach((boot, index) => {
   });
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+  let completedSections = 0;
 
+  function updateProgressBar() {
+    const rangeLabel = document.getElementById('range-label');
+    const rangeInput = document.getElementById('range');
 
-  document.addEventListener('DOMContentLoaded', function() {
-    let completedSections = 0;
+    completedSections = parseInt(rangeInput.value);
+    rangeLabel.textContent = `${completedSections}/5 completed`;
 
-    function updateProgressBar() {
-        const rangeLabel = document.getElementById('range-label');
-        const rangeInput = document.getElementById('range');
-        
-        rangeLabel.textContent = `${completedSections}/5 completed`;
+    // Update the color gradient based on the completion percentage
+    const percentage = (completedSections / 5) * 100;
+    rangeInput.style.background = `linear-gradient(to right, rgb(0,0,0), rgb(0,0,0) ${percentage}%, #ffffff ${percentage}%, #ffffff 100%)`;
+  }
 
-        rangeInput.value = completedSections;
+  function handleSectionClick() {
+    const rangeInput = document.getElementById('range');
+
+    if (this.classList.contains('ticked')) {
+      this.classList.remove('ticked');
+      completedSections--;
+    } else {
+      this.classList.add('ticked');
+      completedSections++;
     }
 
-    function handleSectionClick() {
-        if (this.classList.contains('ticked')) {
-            this.classList.remove('ticked');
-            completedSections--;
-        } else {
-            this.classList.add('ticked');
-            completedSections++;
-        }
+    // Update the range input value
+    rangeInput.value = completedSections;
 
-        updateProgressBar();
+    // Update the progress bar
+    updateProgressBar();
+  }
 
-    }
+  const bootSections = document.querySelectorAll('.boot');
+  bootSections.forEach(section => {
+    section.addEventListener('click', handleSectionClick);
+  });
 
-    const bootSections = document.querySelectorAll('.boot');
-    bootSections.forEach(section => {
-        section.addEventListener('click', handleSectionClick);
-    });
-
-    const collapseSection = document.getElementById('collapse');
-    collapseSection.style.transition = 'max-height 0.5s ease-in-out';
+  const collapseSection = document.getElementById('collapse');
+  collapseSection.style.transition = 'max-height 0.5s ease-in-out';
 });
 
-   function updateProgress() {
-      const progressInput = document.getElementById('progressInput');
-      
-      const progressValue = progressInput.value;
-      
-      const progressBar = document.getElementById('progress');
-      
-      progressBar.style.width = progressValue + '%';
-    }
+

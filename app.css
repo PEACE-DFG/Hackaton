@@ -193,9 +193,9 @@ background: #F1F1F1;
 #range-container input{
   fill: #000; 
 }
-
-#range {
-  background-color: #000; 
+#range::before {
+  width: 100%;
+  background: grey;
 }
 
 #plan{
@@ -283,7 +283,6 @@ background: #F1F1F1;
 
 #range-label{
   font-size: 12px;
-
 }
 
 
@@ -393,7 +392,6 @@ letter-spacing: 0em;
 text-align: left;
 width: Fill (308px);
 height: Hug (30px);
-padding: 6px;
 border-radius: 8px;
 gap: 8px;
 
@@ -410,7 +408,7 @@ letter-spacing: 0em;
 text-align: left;
 width: Fill (308px);
 height: Hug (50px);
-padding: 8px;
+padding: 5px 0px 5px 15px;
 border-radius: 8px;
 
 
@@ -435,7 +433,7 @@ text-align: left;
   justify-content: safe;
   margin-top: 20px;
   background: #F3F3F3;
-padding: 8px 8px 30px 8px;
+padding: 8px 8px 40px 8px;
 }
 .boot{
   padding: 2px;
@@ -475,9 +473,10 @@ text-align: center;
 
 }
 
+
 a{
   text-decoration: none;
-  color: #005BD3;
+  color: #303030;
   font: Inter;
   font-weight: 500;
   font-size: 13px;
@@ -496,6 +495,13 @@ margin-top: 15px;
 border-style: solid;
 border-color: #FFFFFF33;
 box-shadow: 0px 2px 0px 0px #000000, 0px 0px 0px 1.5px #333333;
+}
+#customize:hover{
+  cursor:default;
+  background: #404040;
+}
+#customized:focus{
+  background: #005BD3;
 }
 #love{
 text-align: center;
