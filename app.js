@@ -53,12 +53,12 @@ function rotateSVG(index) {
     playSequence(boot, index);
   } else {
     boot.classList.remove('rotated');
-    resetToDefault(boot);
+    resetToDefault(boot,index);
   }
 }
 
 function playSequence(boot, index) {
-  const delay = 300;
+  const delay = 200;
 const svgSequence = [
   '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 28 28" fill="none"><path d="M26 14C26 16.3734 25.2962 18.6935 23.9776 20.6668C22.6591 22.6402 20.7849 24.1783 18.5922 25.0866C16.3995 25.9948 13.9867 26.2324 11.6589 25.7694C9.33114 25.3064 7.19295 24.1635 5.51472 22.4853C3.83649 20.8071 2.6936 18.6689 2.23058 16.3411C1.76755 14.0133 2.00519 11.6005 2.91345 9.4078C3.8217 7.21509 5.35977 5.34094 7.33316 4.02236C9.30655 2.70379 11.6266 2 14 2" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 28 28" fill="none"><path d="M2 14C2 11.6266 2.70379 9.30655 4.02236 7.33316C5.34094 5.35977 7.21509 3.8217 9.4078 2.91345C11.6005 2.00519 14.0133 1.76755 16.3411 2.23058C18.6689 2.6936 20.8071 3.83649 22.4853 5.51472C24.1635 7.19295 25.3064 9.33114 25.7694 11.6589C26.2324 13.9867 25.9948 16.3995 25.0866 18.5922C24.1783 20.7849 22.6402 22.6591 20.6668 23.9776C18.6935 25.2962 16.3734 26 14 26"stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
@@ -74,6 +74,7 @@ const svgSequence = [
 }
 
 function resetToDefault(boot) {
+  clearTimeout(timeouts[index]);
   boot.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32" fill="none">
       <circle cx="16" cy="16" r="12" stroke="#8A8A8A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 6" />
