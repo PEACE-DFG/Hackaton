@@ -87,8 +87,74 @@ nav{
 #bell:hover{
   background: var(--border-bg);
 }
+#bell:focus{
+  border: 1px solid var(--borderfocus-bg);
+}
+#house:hover{
+  background: #F1F1F1;
+border-radius: 12px;
+height: fit-content;
+
+}
+#house:active{
+ background: #F0F0F0;
+}
+#house:focus{
+  outline: 2px solid  #005BD3;
+
+}
+#look:focus{
+  outline: 2px solid  #005BD3;
+  border-radius: 2px;
+}
+#dismissIcon:focus{
+  outline: 2px solid  #005BD3;
+  border-radius: 2px;
+}
+#rost p:focus{
+  outline: 2px solid  #005BD3;
+
+}
+#rost p:hover{
+  background: #F1F1F1;
+border-radius: 12px;
+height: fit-content;
+
+}
+#rost p:active{
+  background: #F0F0F0;
+ }
+
+ #reast p:active{
+  background: #F0F0F0;
+ }
+#reast p:hover{
+  background: #F1F1F1;
+border-radius: 12px;
+height: fit-content;
+
+}
 #bell:active{
   background: var(--borderpres-bg);
+  
+}
+#love:hover{
+  background-color: #333333;
+
+}
+
+#customize:active{
+  background-color: #2B2B2B;
+
+}
+#customize:focus{
+  outline: 2px solid  #005BD3;
+
+}
+#rope:focus{
+  outline: 2px solid  #005BD3;
+  display: block;
+  border-radius: 3px;
 }
 #dropdown {
   display: none;
@@ -111,6 +177,13 @@ nav{
  justify-content: space-between;
 
 }
+
+#daviid:focus-visible {
+  box-shadow: 0px 0px 0px 3px #005BD3;
+  border: 2px solid #005BD3;
+}
+
+
 #last>li{
   margin: 0px 7px;
 }
@@ -370,7 +443,7 @@ align-items: center;
 #house{
   display: flex;
   align-items: center;
-  padding: 10px 0px 10px 10px;
+  margin: 10px 0px 10px 8px;
 }
 #housetext{
 color:#303030;
@@ -384,6 +457,7 @@ text-align: left;
 }
 #texter{
   padding: 5px 0px 5px 15px;
+  margin: 4px 0px;
   color: #303030;
 font-size: 13px;
 font-weight: 400;

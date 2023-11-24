@@ -1,8 +1,10 @@
+// Function to toggle the display of a dropdown element
 function toggleDropdown() {
   var dropdown = document.getElementById("dropdown");
   dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
 }
 
+// Function to toggle the display of a dropdown content element using modern syntax
 
  function togleDropdown() {
   const dropdownContent = document.querySelector(".custom-dropdown-content");
@@ -10,6 +12,7 @@ function toggleDropdown() {
 }
 
 
+// Function to dismiss content elements by removing them from the DOM
 
 function dismissContent() {
   var dismissElement = document.getElementById("dismiss");
@@ -17,6 +20,8 @@ function dismissContent() {
   dismissElement.parentNode.removeChild(dismissElement);
   dismissBack.parentNode.removeChild(dismissBack);
 }
+
+// Function to handle the collapse and expand animation of a section with a chevron icon
 
 document.addEventListener('DOMContentLoaded', function() {
   const collapseSection = document.getElementById('collapse');
@@ -41,8 +46,12 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+// Functions to handle the rotation of SVG elements
+
 const rotatedStates = Array.from({ length: 5 }, () => false);
 const timeouts = [];
+
+// Function to reset SVG to default state
 
 function resetToDefault(boot, index) {
   clearTimeout(timeouts[index]);
@@ -51,6 +60,8 @@ function resetToDefault(boot, index) {
       <circle cx="16" cy="16" r="12" stroke="#8A8A8A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 6" />
     </svg>`;
 }
+
+// Function to rotate SVG elements and play a sequence
 
 function rotateSVG(index) {
   const boot = document.querySelector(`.boot[data-index="${index}"]`);
@@ -71,6 +82,7 @@ function rotateSVG(index) {
 
 
 
+// Function to play a sequence of SVG animations
 
 function playSequence(boot, index) {
   const delay = 200;
@@ -88,6 +100,7 @@ const svgSequence = [
   }
 }
 
+// Event listeners for SVG elements to trigger rotation
 
 const boots = document.querySelectorAll('.boot');
 boots.forEach((boot, index) => {
@@ -99,9 +112,13 @@ boots.forEach((boot, index) => {
 
 
 
+// Function to update progress bar based on completed sections
 
 document.addEventListener('DOMContentLoaded', function () {
   let completedSections = 0;
+
+
+  // Function to update progress bar
 
   function updateProgressBar() {
     const rangeLabel = document.getElementById('range-label');
@@ -114,6 +131,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const percentage = (completedSections / 5) * 100;
     rangeInput.style.background = `linear-gradient(to right, rgb(0,0,0), rgb(0,0,0) ${percentage}%, #ffffff ${percentage}%, #ffffff 100%)`;
   }
+
+    // Function to handle the click on a section and update progress
 
   function handleSectionClick() {
     const rangeInput = document.getElementById('range');
@@ -133,13 +152,130 @@ document.addEventListener('DOMContentLoaded', function () {
     updateProgressBar();
   }
 
+    // Event listeners for section clicks
+
   const bootSections = document.querySelectorAll('.boot');
   bootSections.forEach(section => {
     section.addEventListener('click', handleSectionClick);
   });
+
+    // Transition setup for the collapse section
 
   const collapseSection = document.getElementById('collapse');
   collapseSection.style.transition = 'max-height 0.5s ease-in-out';
 });
 
 
+
+document.addEventListener('keydown', function (event) {
+  const keyCode = event.code;
+
+  switch (keyCode) {
+    case 'ArrowUp':
+      handleArrowUp();
+      break;
+    case 'ArrowDown':
+      handleArrowDown();
+      break;
+    case 'ArrowLeft':
+      handleArrowLeft();
+      break;
+    case 'ArrowRight':
+      handleArrowRight();
+      break;
+    case 'Enter':
+      handleEnter();
+      break;
+    case 'Escape':
+      handleEscape();
+      break;
+  }
+});
+
+function handleArrowUp() {
+  navigateFocus(-1);
+}
+
+function handleArrowDown() {
+  navigateFocus(1);
+}
+function handleArrowLeft() {
+  navigateHorizontalFocus(-1);
+}
+
+function handleArrowRight() {
+  navigateHorizontalFocus(1);
+}
+
+function navigateFocus(direction) {
+  const focusableElements = getFocusableElements();
+  const currentFocusedIndex = focusableElements.indexOf(document.activeElement);
+
+  if (currentFocusedIndex !== -1) {
+    const newIndex = (currentFocusedIndex + direction + focusableElements.length) % focusableElements.length;
+    focusableElements[newIndex].focus();
+  }
+}
+
+function getFocusableElements() {
+  return Array.from(document.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'));
+}
+
+function handleEnter() {
+  console.log('Enter pressed');
+  simulateLeftClick();
+}
+
+function simulateLeftClick() {
+  const focusedElement = document.activeElement;
+  if (focusedElement) {
+    focusedElement.click();
+  }
+}
+
+function handleEscape() {
+  console.log('Escape pressed');
+  window.scrollTo(0, 0);
+}
+
+// The rest of your existing code...
+
+
+
+
+
+
+function toggleCollapse(sectionId) {
+  // Hide voom1, voom2, voom3, voom4, voom5
+  const voomElements = document.querySelectorAll('.voom1, .voom2, .voom3, .voom4, .voom5');
+  voomElements.forEach(element => {
+    element.style.display = 'none';
+  });
+
+  // Change background color and remove unnecessary space
+  const section = document.getElementById(sectionId);
+  section.style.backgroundColor = 'white';
+  section.style.padding = '0'; // You can adjust this value based on your styling
+
+}
+
+
+function toggleCollapses(sectionId) {
+  // Hide voom6, voom7, voom8, voom9, voom10
+  const voomElements = document.querySelectorAll('.voom6, .voom7, .voom8, .voom9, .voom10');
+  voomElements.forEach(element => {
+    element.style.display = 'none';
+  });
+
+  // Change background color and remove unnecessary space
+  const section = document.getElementById(sectionId);
+  if (section) {
+    // Reset individual styles to default
+    section.style.backgroundColor = 'white';
+    section.style.padding = '0';
+    section.style.margin = '0';
+    section.style.gap = '0';
+
+    // Rest of your toggleCollapse logic...
+  }
+}
