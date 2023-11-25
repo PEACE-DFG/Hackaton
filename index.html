@@ -45,7 +45,7 @@
                 <input type="text" class="search-input" id="search-input" placeholder="Search">
             </div>
             <div class="user-details">
-                <button class="notification" onclick="toggleNotificationDropdown()">
+                <button class="notification" aria-label="true" onclick="toggleNotificationDropdown()">
                     <div class="notification-icon">
                         <svg
                             width="20"
@@ -253,7 +253,7 @@
                                         id="Checkbox1"
                                         class="step-checkbox"
                                         onchange="updateProgress()">
-                                    <span>
+                                    <span id="svgContainer">
                                         <svg
                                             width="24"
                                             height="24"

@@ -8,6 +8,9 @@ function toggleDropdown() {
   var dropdownContent = document.querySelector('.dropdown-content');
   var dropdown = document.querySelector('.dropdown');
 
+  // Add a slow transition to the display property
+  dropdownContent.style.transition = 'display 0.5s ease';
+
   dropdownContent.style.display = dropdownContent.style.display === 'none'
       ? 'block'
       : 'none';
@@ -27,6 +30,10 @@ function toggleStep(stepId) {
       currentStep
           .getElementsByClassName("step-content")[0]
           .style
+          .transition = 'display 0.5s ease'; // Add a slow transition
+      currentStep
+          .getElementsByClassName("step-content")[0]
+          .style
           .display = "none";
       currentStep
           .classList
@@ -37,15 +44,19 @@ function toggleStep(stepId) {
   stepContent
       .getElementsByClassName("step-content")[0]
       .style
+      .transition = 'display 0.5s ease'; // Add a slow transition
+  stepContent
+      .getElementsByClassName("step-content")[0]
+      .style
       .display = "block";
   stepContent
       .classList
       .add("active");
-
 }
 
 // Open the first step by default
 toggleStep('step1');
+
 
 // PROGRESS BAR
 function updateProgress() {
@@ -154,3 +165,4 @@ window.onclick = function(event) {
       }
   }
 }
+
